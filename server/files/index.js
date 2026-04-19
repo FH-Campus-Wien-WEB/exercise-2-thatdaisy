@@ -8,7 +8,6 @@ window.onload = function () {
         /* Task 1.3. Add your code from exercise 1 here 
            and include a non-functional 'Edit' button
            to pass this test */
-           console.log(movie)
            const article = document.createElement('article')
            article.setAttribute("id", movie.imdbID)
 
@@ -94,8 +93,8 @@ window.onload = function () {
             editButton.textContent = 'Edit'
             editButton.addEventListener('click', function () {
               console.log('Edit clicked for', movie.imdbID)
+              location.href = 'edit.html?imdbID=' + movie.imdbID
             })
-
 
             moviePoster.append(poster)
             movieInfo.append(title, releasedAndRuntime, genres, directors, writers, actorsLabel, actorsList, plot, rating, editButton)
