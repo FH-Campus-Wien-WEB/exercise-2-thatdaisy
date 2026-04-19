@@ -26,14 +26,29 @@ app.get('/movies', function (req, res) {
 app.get('/movies/:imdbID', function (req, res) {
   /* Task 2.1. Remove the line below and add the 
     functionality here */
-  res.sendStatus(404)
+  const movie = movieModel[req.params.imdbID];
+  if (movie) {
+    res.send({ imdbID: req.params.imdbID, ...movie });
+  } else {
+    res.sendStatus(404);
+  }
 })
 
 /* Task 3.1 and 3.2.
    - Add a new PUT endpoint
    - Check whether the movie sent by the client already exists 
      and continue as described in the assignment */
-
+app.put('/movies/:imdbID', function (req, res) {
+  if (movieModel[req.params.imdbID]) {
+    movieModel[req.params.imdbID] = req.body;
+    res.sendStatus(200);
+  } else {
+    movieModel[req.params.imdbID] = req.body;
+    console.log('new movie added', req.params.imdbID, Object.keys(movieModel));
+    res.status(201).send(req.body);
+  }
+});
+     
 app.listen(3000)
 
 console.log("Server now listening on http://localhost:3000/")
